@@ -1,0 +1,357 @@
+// Importar estilos generales
+//@import "../../styles";
+
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+
+* {
+   box-sizing: border-box;
+ }
+body {
+   background: black;
+}
+h1 {
+  text-align : center;
+}
+
+$light-grey: #000;
+$dark-grey: #4e47f5;
+$pink: #dd14d5;
+$medium-grey: #3de8f3;
+$y-button: #189629;
+$x-button: #3355FF;
+$b-button: #FFDC00;
+$a-button: #BF2231;
+$font-title: Oswald, sans-serif;
+$size: 20em;
+
+.keypad {
+  width: $size * 1.5;
+  height: $size * 0.85;
+  background: linear-gradient(
+          $light-grey,
+          darken($light-grey,4)
+  );
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5em;
+  position: relative;
+  box-shadow: 0 5px 7px -5px rgba(#000,.8);
+  border-top: 1px solid lighten($medium-grey,20);
+  border-bottom: 1px solid $medium-grey;
+  &__inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+            $light-grey,
+            darken($light-grey,13)
+    );
+    z-index: 200;
+  }
+
+  &::before,
+  &::after{
+    width: $size;
+    height: $size;
+    content: '';
+    display: block;
+    background: linear-gradient(
+                $light-grey,
+                darken($light-grey,15)
+                );
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 6px 6px -4px rgba(#000,.5),
+                0 0 0 1px lighten($medium-grey,20);
+    //border: 2px solid $medium-grey;
+    //top: -2px;
+  }
+  &::before {
+    left: -$size/2;
+  }
+  &::after {
+    right: -$size/2;
+  }
+
+  &__title {
+    font-family: $font-title;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: $size * 0.08;
+    transform: skew(-8deg);
+    font-weight: bold;
+    color: rgba(white,.9);
+    padding-top: .5em;
+    margin-bottom: -.15em;
+  }
+  
+  &__subtitle {
+    background: white;
+    color: $light-grey;
+    font-family: $font-title;
+    text-transform: uppercase;
+    font-size: $size * 0.035;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    transform: skew(-5deg);
+    padding: 0 0 0 .2em;
+    letter-spacing: .3em;
+  }
+}
+
+.central-button {
+  width: $size / 7;
+  height: $size / 24;
+  background: radial-gradient(lighten($pink,25), darken($pink,10));
+  box-shadow: 0 -1px 1px rgba(#000 ,.6) inset,
+              0 1px 1px rgba(#fff,.2) inset;
+  border-radius: $size / 3;
+  position: relative;
+  &-container {
+    position: absolute;
+    transform: rotate(-40deg);
+    bottom: $size / 18;
+    left: $size * 0.58;
+    &.start {
+      left: $size * 0.8;
+    }
+
+    p {
+      margin: 0;
+      transform: rotate(40deg) skew(-5deg) translateX(-1em);
+      padding-top: 1.5em;
+      font-family: $font-title;
+      text-transform: uppercase;
+      font-size: .9em;
+      letter-spacing: 0.1em;
+    }
+  }
+  &::before {
+    content:'';
+    position: absolute;
+    width: 104%;
+    height: 110%;
+    background: linear-gradient(to right, white, $medium-grey);
+    z-index: -1;
+    top: -5%;
+    left: -2%;
+    border-radius: $size;
+    box-shadow: 0 0 0 $size / 500 $medium-grey;
+  }
+
+}
+
+.pad-right {
+  $s: $size * 0.9;
+  width: $s;
+  height: $s;
+  background: linear-gradient(lighten($medium-grey,15), darken($medium-grey,15));
+  position: absolute;
+  z-index: 500;
+  right: -$size * 0.45;
+  top: $size * 0.05;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff,
+              0 0 0 3px lighten($medium-grey,25);
+}
+
+.pad-left {
+  $s: $size * 0.6;
+  width: $s;
+  height: $s;
+  position: absolute;
+  border-radius: 50%;
+  left: -$s / 2;
+  background: rgba(#000,.1);
+  z-index: 500;
+  top: ($size - $s) / 2;
+  box-shadow: 0 1px 1px rgba(#000,.1) inset,
+              0 -1px 1px #fff inset;
+  border: 1px solid rgba($medium-grey,.2);
+}
+
+.cross-x,
+.cross-y {
+  position: absolute;
+  width: 80%;
+  height: 25%;
+  background: $dark-grey;
+  top: 37.5%;
+  left: 10%;
+  border-radius: 5px;
+  opacity: .97;
+
+  &::before,
+  &::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border: {
+      width: 1em 1.8em;
+      color: transparent transparent transparent white;
+      style: solid;
+    }
+    position: absolute;
+    opacity: .15;
+    top: .5em;
+  }
+  &::before {
+    right: -1.2em;
+  }
+  &::after {
+    transform: rotateY(180deg);
+    left: -1.2em;
+  }
+}
+
+.cross-y {
+  transform: rotate(90deg);
+  box-shadow: 2px 0 2px -1px rgba(#000,.9);
+}
+
+.cross-x {
+  box-shadow: 0 2px 1px rgba(#000,.8);
+}
+
+.cross-middle {
+  position: absolute;
+  width: 16%;
+  height: 16%;
+  background: radial-gradient(rgba(#fff,.2), transparent);
+  top: 42%;
+  left: 42%;
+  border-radius: 50%;
+  box-shadow: 0 1px 1px rgba(#000,.5) inset;
+}
+
+.circular-button {
+  $s: $size / 7;
+  height: $s;
+  width: $s;
+  border-radius: 50%;
+  position: absolute;
+
+  box-shadow: 0 .1em 2px rgba(#fff,.2) inset,
+              0 -1px 2px rgba(#000,.2) inset,
+              0 0 0 1px $dark-grey;
+  z-index: 500;
+}
+
+.circular-button:hover {
+  background: white;
+}
+
+
+.a-button {
+  background: linear-gradient($a-button 10%, darken($a-button, 15) 90%);
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20%;
+ }
+.a-button:hover {
+  background: cyan;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20%;
+ }
+.b-button {
+  background: linear-gradient($b-button 10%, darken($b-button, 15) 90%);
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.x-button {
+  background: linear-gradient($x-button 10%, darken($x-button, 15) 90%);
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.y-button {
+  background: linear-gradient($y-button 10%, darken($y-button, 15) 90%);
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20%;
+}
+
+.circular-button-container {
+  background: linear-gradient($light-grey,lighten($medium-grey,20));
+  width: 55%;
+  height: 22%;
+  border-radius: 5em;
+  position: absolute;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 2px rgba(#000,.2);
+  &::before,
+  &::after{
+    transform: rotate(45deg) skew(5deg);
+    display: block;
+    font-family: sans-serif;
+    color: #fff;
+    position: absolute;
+    font-size: 1.5em;
+  }
+}
+
+.xy-container {
+  top: 5em;
+  left: 2.1em;
+  &::before {
+    content: "Y";
+    top: .5em;
+    left: -1.2em;
+  }
+  &::after {
+    content: "X";
+    top: 1em;
+    left: 7em;
+  }
+}
+
+.ab-container {
+  top: 9em;
+  left: 6em;
+  &::before {
+    content: "A";
+    top: 1em;
+    left: 7em;
+  }
+  &::after {
+    content: "B";
+    left: -1.1em;
+    top: .5em;
+  }
+}
+
+.top-button {
+  width: 10em;
+  height: 2em;
+  position: absolute;
+  background: lighten($medium-grey,35);
+  border: 1px solid rgba($medium-grey,.5);
+  top: -.5em;
+  z-index: -1;
+  box-shadow: 0 2px 1px #fff inset;
+}
+
+.l-button {
+  left: -3em;
+  border-top-left-radius: 60px 10px;
+  border-top-right-radius: 5px;
+}
+
+.r-button {
+  right: -3em;
+  border-top-right-radius: 60px 10px;
+  border-top-left-radius: 5px;
+}
+
+.wire {
+  width: 1.5em;
+  height: 10em;
+  position: absolute;
+  background: linear-gradient(to left, $pink 10%,lighten($pink,20) 40%,$dark-grey 80%);
+  top: -10em;
+  left: 50%;
+  transform: translateX(-50%);
+}
